@@ -19,26 +19,28 @@ class App extends Component {
   updateArray = () => {
     const textInput = this.state.textInput;
     const todos = this.state.todos;
-    let counter = this.state.counter
-    console.log(counter)
+    let counter = this.state.counter;
+    console.log(counter);
     const newItem = {
-        textInput: textInput,
-        id: this.state.counter
-    }
+      textInput: textInput,
+      id: this.state.counter
+    };
     todos.push(newItem);
-    counter= counter+1
+    counter = counter + 1;
 
     this.setState({
-      todos: todos, 
-      counter: counter  
-    })
+      todos: todos,
+      counter: counter
+    });
 
     console.log(todos);
   };
   type = e => {
     this.setState({ textInput: e.target.value });
   };
-  
+  deleteTodo = id => {
+    this.setState({ todos: this.state.todos.filter(todo => todo.id !== id) });
+  };
   render() {
     console.log("textInput", this.state.textInput);
     console.log("todos", this.state.todos);
@@ -47,12 +49,14 @@ class App extends Component {
       <div>
         <button onClick={this.updateArray}>Submit</button>
         <input type="text" onChange={this.type}></input>
-        {this.state.todos.map(
-          (item, index) =>{
-            console.log(item)
-            
-          }
-        )}
+        {this.state.todos.map((item, index) => {
+          return (
+            <div>
+              <div>{item.textInput}</div>
+              <button onClick={() => this.deleteTodo(item.id)}>Delete</button>
+            </div>
+          );
+        })}
       </div>
     );
   }
