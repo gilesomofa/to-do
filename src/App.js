@@ -44,6 +44,7 @@ class App extends Component {
   render() {
     console.log("textInput", this.state.textInput);
     console.log("todos", this.state.todos);
+    //checking my directories
 
     return (
       <div>
